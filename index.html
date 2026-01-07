@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerFlow Pro | Simulação de Redes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js"></script>
+    <script type="module" src="js/principal.js" defer></script>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Fluxo de Potência <span>Distribuição</span></h2>
+            </div>
+            <nav class="menu">
+                <button class="menu-item active" onclick="navegar('home')">
+                    <span class="material-symbols-outlined">home</span> Início
+                </button>
+                <hr>
+                <button class="menu-item" onclick="navegar('config')">
+                    <span class="material-symbols-outlined">settings</span> 1. Configuração Base
+                </button>
+                <button class="menu-item" onclick="navegar('biblioteca')">
+                    <span class="material-symbols-outlined">library_books</span> 2. Biblioteca de Cabos
+                </button>
+                <button class="menu-item" onclick="navegar('nodos')">
+                    <span class="material-symbols-outlined">account_tree</span> 3. Nodos e Cargas
+                </button>
+                <button class="menu-item" onclick="navegar('trechos')">
+                    <span class="material-symbols-outlined">bolt</span> 4. Trechos e Redes
+                </button>
+                <button class="menu-item" onclick="navegar('arquivos')">
+                    <span class="material-symbols-outlined">folder_zip</span> 5. Gestão de Arquivos
+                </button>
+                <hr>
+                <button class="btn-primary" onclick="rodarSimulacao()">
+                    <span class="material-symbols-outlined">rocket_launch</span> Executar Fluxo
+                </button>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <section id="view-home" class="view active">
+                <div class="hero">
+                    <h1>Simulador de Fluxo de Potência Radial</h1>
+                    <p>Siga os passos numerados ou importe um arquivo JSON na Aba 5.</p>
+                    <img src="distribuicao2.jpg" alt="Rede Elétrica" class="hero-img">
+                </div>
+            </section>
+
+            <section id="view-config" class="view">
+                <h2>1. Configuração Base do Sistema</h2>
+                <div class="card">
+                    <form id="form-config">
+                        <div class="form-group">
+                            <label>Título do Projeto</label>
+                            <input type="text" id="cfg-titulo">
+                        </div>
+                        <div class="grid-2-col">
+                            <div class="form-group">
+                                <label>V Base (kV)</label>
+                                <input type="number" id="cfg-vbase" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label>S Base (MVA)</label>
+                                <input type="number" id="cfg-sbase" step="0.01">
+                            </div>
+                        </div>
+                        <div class="grid-2-col">
+                            <div class="form-group">
+                                <label>V Subestação (pu)</label>
+                                <input type="number" id="cfg-vslack" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label>Tolerância Erro</label>
+                                <input type="number" id="cfg-tol" step="0.0001">
+                            </div>
+                        </div>
+                        <button type="button" class="btn-secondary" onclick="salvarConfiguracao()">Salvar Configurações</button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="view-biblioteca" class="view">
+                <h2>2. Biblioteca de Condutores</h2>
+                <div class="card">
+                    <h3>Adicionar Novo Cabo</h3>
+                    <div class="grid-3-col">
+                        <div class="form-group"><label>Nome</label><input type="text" id="cabo-id"></div>
+                        <div class="form-group"><label>R (Ω/km)</label><input type="number" id="cabo-r" step="0.0001"></div>
+                        <div class="form-group"><label>X (Ω/km)</label><input type="number" id="cabo-x" step="0.0001"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="adicionarCabo()">Cadastrar Cabo</button>
+                </div>
+                <div class="card">
+                    <table class="tabela-dados">
+                        <thead><tr><th>ID / Nome</th><th>R (Ω/km)</th><th>X (Ω/km)</th><th>Ações</th></tr></thead>
+                        <tbody id="tabela-cabos-body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="view-nodos" class="view">
+                <h2>3. Cadastro de Nodos (Barras)</h2>
+                <div class="card">
+                    <div class="grid-4-col">
+                        <div class="form-group"><label>ID</label><input type="text" id="nodo-id"></div>
+                        <div class="form-group"><label>Tipo</label>
+                            <select id="nodo-tipo"><option value="PQ">PQ</option><option value="Slack">Slack</option></select>
+                        </div>
+                        <div class="form-group"><label>P (W)</label><input type="number" id="nodo-p"></div>
+                        <div class="form-group"><label>Q (VAr)</label><input type="number" id="nodo-q"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="adicionarNodo()">Adicionar Barra</button>
+                </div>
+                <div class="card">
+                    <table class="tabela-dados">
+                        <thead><tr><th>ID</th><th>Tipo</th><th>P (W)</th><th>Q (VAr)</th><th>Ações</th></tr></thead>
+                        <tbody id="tabela-nodos-body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="view-trechos" class="view">
+                <h2>4. Conectividade (Trechos e Redes)</h2>
+                <div class="card">
+                    <div class="grid-4-col">
+                        <div class="form-group"><label>De</label><select id="trecho-de"></select></div>
+                        <div class="form-group"><label>Para</label><select id="trecho-para"></select></div>
+                        <div class="form-group"><label>Cabo</label><select id="trecho-cabo"></select></div>
+                        <div class="form-group"><label>Km</label><input type="number" id="trecho-km" step="0.001"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="adicionarTrecho()">Conectar Trecho</button>
+                </div>
+                <div class="card">
+                    <table class="tabela-dados">
+                        <thead><tr><th>De</th><th>Para</th><th>Cabo</th><th>Comp. (km)</th><th>Ações</th></tr></thead>
+                        <tbody id="tabela-trechos-body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="view-arquivos" class="view">
+                <h2>5. Gestão de Arquivos (JSON)</h2>
+                <div class="card">
+                    <h3>Exportar Projeto</h3>
+                    <p>Baixe os dados atuais no formato compatível.</p>
+                    <button class="btn-primary" onclick="exportarProjeto()">Exportar JSON</button>
+                </div>
+                <div class="card">
+                    <h3>Importar Projeto</h3>
+                    <p>Carregue um arquivo para restaurar o sistema.</p>
+                    <input type="file" id="input-arquivo" style="display:none" onchange="importarProjeto(event)">
+                    <button class="btn-outline" onclick="document.getElementById('input-arquivo').click()">Selecionar Arquivo</button>
+                </div>
+            </section>
+
+            <section id="view-resultados" class="view">
+                <h2>Resultados da Simulação</h2>
+                <div id="container-resultados"></div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

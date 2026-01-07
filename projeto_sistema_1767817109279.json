@@ -1,0 +1,108 @@
+{
+  "configuracao": {
+    "titulo": "sistema_6_barras",
+    "v_base_kv": 11,
+    "s_base_mva": 0.1,
+    "v_subestacao_pu": 1,
+    "tolerancia": 0.001,
+    "max_iteracoes": 100,
+    "casas_decimais_exibicao": 3
+  },
+  "biblioteca_cabos": [
+    {
+      "id": "trecho_1_2",
+      "r_total_ohm": 28.193,
+      "x_total_ohm": 94.38
+    },
+    {
+      "id": "trecho_2_3",
+      "r_total_ohm": 3.146,
+      "x_total_ohm": 138.424
+    },
+    {
+      "id": "trecho_3_4",
+      "r_total_ohm": 170.731,
+      "x_total_ohm": 275.638
+    },
+    {
+      "id": "trecho_2_5",
+      "r_total_ohm": 159.72,
+      "x_total_ohm": 139.15
+    },
+    {
+      "id": "trecho_5_6",
+      "r_total_ohm": 453.629,
+      "x_total_ohm": 395.186
+    }
+  ],
+  "nodos": [
+    {
+      "id": "1",
+      "tipo": "Slack",
+      "p_w": 0,
+      "q_var": 0
+    },
+    {
+      "id": "2",
+      "tipo": "PQ",
+      "p_w": 1840,
+      "q_var": 460
+    },
+    {
+      "id": "3",
+      "tipo": "PQ",
+      "p_w": 980,
+      "q_var": 370
+    },
+    {
+      "id": "4",
+      "tipo": "PQ",
+      "p_w": 1790,
+      "q_var": 446
+    },
+    {
+      "id": "5",
+      "tipo": "PQ",
+      "p_w": 1598,
+      "q_var": 1840
+    },
+    {
+      "id": "6",
+      "tipo": "PQ",
+      "p_w": 1610,
+      "q_var": 600
+    }
+  ],
+  "trechos": [
+    {
+      "de": "1",
+      "para": "2",
+      "cabo": "trecho_1_2",
+      "comprimento": 1
+    },
+    {
+      "de": "2",
+      "para": "3",
+      "cabo": "trecho_2_3",
+      "comprimento": 1
+    },
+    {
+      "de": "3",
+      "para": "4",
+      "cabo": "trecho_3_4",
+      "comprimento": 1
+    },
+    {
+      "de": "2",
+      "para": "5",
+      "cabo": "trecho_2_5",
+      "comprimento": 1
+    },
+    {
+      "de": "5",
+      "para": "6",
+      "cabo": "trecho_5_6",
+      "comprimento": 1
+    }
+  ]
+}
