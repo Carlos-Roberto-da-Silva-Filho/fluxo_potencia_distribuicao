@@ -1,0 +1,48 @@
+{
+  "configuracao": {
+    "titulo": "sistema_15_barras_das",
+    "v_base_kv": 11,
+    "s_base_mva": 1,
+    "v_subestacao_pu": 1,
+    "tolerancia": 0.0001,
+    "max_iteracoes": 100,
+    "casas_decimais_exibicao": 4
+  },
+  "biblioteca_cabos": [
+    { "id": "tipo_A", "r_total_ohm": 1.3530, "x_total_ohm": 1.3235 },
+    { "id": "tipo_B", "r_total_ohm": 1.1702, "x_total_ohm": 1.1446 }
+  ],
+  "nodos": [
+    { "id": "1", "tipo": "Slack", "p_w": 0, "q_var": 0 },
+    { "id": "2", "tipo": "PQ", "p_w": 44100, "q_var": 44990 },
+    { "id": "3", "tipo": "PQ", "p_w": 70000, "q_var": 50000 },
+    { "id": "4", "tipo": "PQ", "p_w": 140000, "q_var": 90000 },
+    { "id": "5", "tipo": "PQ", "p_w": 44100, "q_var": 45000 },
+    { "id": "6", "tipo": "PQ", "p_w": 70000, "q_var": 50000 },
+    { "id": "7", "tipo": "PQ", "p_w": 140000, "q_var": 90000 },
+    { "id": "8", "tipo": "PQ", "p_w": 44100, "q_var": 45000 },
+    { "id": "9", "tipo": "PQ", "p_w": 70000, "q_var": 50000 },
+    { "id": "10", "tipo": "PQ", "p_w": 140000, "q_var": 90000 },
+    { "id": "11", "tipo": "PQ", "p_w": 44100, "q_var": 45000 },
+    { "id": "12", "tipo": "PQ", "p_w": 70000, "q_var": 50000 },
+    { "id": "13", "tipo": "PQ", "p_w": 140000, "q_var": 90000 },
+    { "id": "14", "tipo": "PQ", "p_w": 44100, "q_var": 45000 },
+    { "id": "15", "tipo": "PQ", "p_w": 44100, "q_var": 45000 }
+  ],
+  "trechos": [
+    { "de": "1", "para": "2", "cabo": "tipo_A", "comprimento": 1 },
+    { "de": "2", "para": "3", "cabo": "tipo_B", "comprimento": 1 },
+    { "de": "3", "para": "4", "cabo": "tipo_B", "comprimento": 1 },
+    { "de": "4", "para": "5", "cabo": "tipo_A", "comprimento": 1 },
+    { "de": "2", "para": "9", "cabo": "tipo_A", "comprimento": 1 },
+    { "de": "9", "para": "10", "cabo": "tipo_B", "comprimento": 1 },
+    { "de": "10", "para": "11", "cabo": "tipo_B", "comprimento": 1 },
+    { "de": "3", "para": "6", "cabo": "tipo_A", "comprimento": 1 },
+    { "de": "6", "para": "7", "cabo": "tipo_B", "comprimento": 1 },
+    { "de": "7", "para": "8", "cabo": "tipo_B", "comprimento": 1 },
+    { "de": "4", "para": "12", "cabo": "tipo_A", "comprimento": 1 },
+    { "de": "12", "para": "13", "cabo": "tipo_B", "comprimento": 1 },
+    { "de": "13", "para": "14", "cabo": "tipo_B", "comprimento": 1 },
+    { "de": "14", "para": "15", "cabo": "tipo_A", "comprimento": 1 }
+  ]
+}
