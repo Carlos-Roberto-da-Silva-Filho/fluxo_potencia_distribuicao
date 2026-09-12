@@ -1,0 +1,45 @@
+{
+  "configuracao": {
+    "titulo": "Sistema de Distribuição 10 Barras - BFS Mapeado",
+    "v_base_kv": 23.0,
+    "s_base_mva": 10.0,
+    "v_subestacao_pu": 1.0,
+    "tolerancia": 0.001,
+    "max_iteracoes": 50,
+    "casas_decimais_exibicao": 3
+  },
+  "biblioteca_cabos": [
+    { "id": "trecho_1_2", "r_total_ohm": 0.1233, "x_total_ohm": 0.4127 },
+    { "id": "trecho_2_3", "r_total_ohm": 0.0140, "x_total_ohm": 0.6051 },
+    { "id": "trecho_3_4", "r_total_ohm": 0.7463, "x_total_ohm": 1.2050 },
+    { "id": "trecho_4_5", "r_total_ohm": 0.6984, "x_total_ohm": 0.6084 },
+    { "id": "trecho_5_6", "r_total_ohm": 1.9831, "x_total_ohm": 1.7276 },
+    { "id": "trecho_6_7", "r_total_ohm": 0.9053, "x_total_ohm": 0.7886 },
+    { "id": "trecho_7_8", "r_total_ohm": 2.0552, "x_total_ohm": 1.1640 },
+    { "id": "trecho_8_9", "r_total_ohm": 4.7953, "x_total_ohm": 2.7160 },
+    { "id": "trecho_9_10", "r_total_ohm": 5.3434, "x_total_ohm": 3.0264 }
+  ],
+  "nodos": [
+    { "id": "1", "tipo": "Slack", "p_w": 0, "q_var": 0 },
+    { "id": "2", "tipo": "PQ", "p_w": 1840000, "q_var": 460000 },
+    { "id": "3", "tipo": "PQ", "p_w": 980000, "q_var": 340000 },
+    { "id": "4", "tipo": "PQ", "p_w": 1790000, "q_var": 446000 },
+    { "id": "5", "tipo": "PQ", "p_w": 1598000, "q_var": 1840000 },
+    { "id": "6", "tipo": "PQ", "p_w": 1610000, "q_var": 600000 },
+    { "id": "7", "tipo": "PQ", "p_w": 780000, "q_var": 110000 },
+    { "id": "8", "tipo": "PQ", "p_w": 1150000, "q_var": 60000 },
+    { "id": "9", "tipo": "PQ", "p_w": 980000, "q_var": 130000 },
+    { "id": "10", "tipo": "PQ", "p_w": 1640000, "q_var": 200000 }
+  ],
+  "trechos": [
+    { "de": "1", "para": "2", "cabo": "trecho_1_2", "comprimento": 1 },
+    { "de": "2", "para": "3", "cabo": "trecho_2_3", "comprimento": 1 },
+    { "de": "3", "para": "4", "cabo": "trecho_3_4", "comprimento": 1 },
+    { "de": "4", "para": "5", "cabo": "trecho_4_5", "comprimento": 1 },
+    { "de": "5", "para": "6", "cabo": "trecho_5_6", "comprimento": 1 },
+    { "de": "6", "para": "7", "cabo": "trecho_6_7", "comprimento": 1 },
+    { "de": "7", "para": "8", "cabo": "trecho_7_8", "comprimento": 1 },
+    { "de": "8", "para": "9", "cabo": "trecho_8_9", "comprimento": 1 },
+    { "de": "9", "para": "10", "cabo": "trecho_9_10", "comprimento": 1 }
+  ]
+}

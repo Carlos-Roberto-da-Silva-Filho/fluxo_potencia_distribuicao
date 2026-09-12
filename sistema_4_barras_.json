@@ -1,0 +1,27 @@
+{
+  "configuracao": {
+    "titulo": "Sistema de Distribuição 4 Barras - BFS Mapeado",
+    "v_base_kv": 13.8,
+    "s_base_mva": 100.0,
+    "v_subestacao_pu": 1.05,
+    "tolerancia": 0.001,
+    "max_iteracoes": 100,
+    "casas_decimais_exibicao": 3
+  },
+  "biblioteca_cabos": [
+    { "id": "trecho_1_2", "r_total_ohm": 4.4944, "x_total_ohm": 4.4373 },
+    { "id": "trecho_2_3", "r_total_ohm": 0.0571, "x_total_ohm": 0.0381 },
+    { "id": "trecho_3_4", "r_total_ohm": 0.9712, "x_total_ohm": 0.0952 }
+  ],
+  "nodos": [
+    { "id": "1", "tipo": "Slack", "p_w": 0, "q_var": 0 },
+    { "id": "2", "tipo": "PQ", "p_w": 1280000, "q_var": 1280000 },
+    { "id": "3", "tipo": "PQ", "p_w": 320000, "q_var": 160000 },
+    { "id": "4", "tipo": "PQ", "p_w": 1600000, "q_var": 800000 }
+  ],
+  "trechos": [
+    { "de": "1", "para": "2", "cabo": "trecho_1_2", "comprimento": 1 },
+    { "de": "2", "para": "3", "cabo": "trecho_2_3", "comprimento": 1 },
+    { "de": "3", "para": "4", "cabo": "trecho_3_4", "comprimento": 1 }
+  ]
+}
